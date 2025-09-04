@@ -3,6 +3,8 @@
     // const WIDGET_URL = 'http://localhost:5173/'; // dev
     const WIDGET_ORIGIN = new URL(WIDGET_URL).origin; // usado no postMessage
 
+    const chevronDownSVG = '../../imgs/chevron-down.svg';
+
     const WIDGET_WIDTH = 320;
     const WIDGET_HEIGHT = 600;
 
@@ -18,19 +20,21 @@
             bottom: 24px;
             right: 24px;
             z-index: 9999;
-            padding: 14px 22px;
+            padding: 14px;
             border-radius: 50px;
-            background: #007bff;
+            background: #6f34e4;
             color: #fff;
             border: none;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 0; /* Remove texto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: background 0.2s;
         }
         .widget-btn:hover {
-            background: #0056b3;
+            background: #340055;
         }
         .widget-container {
             position: fixed;
@@ -69,12 +73,20 @@
     `;
     document.head.appendChild(style);
 
-    // Cria botão flutuante
+    // Cria botão flutuante com ícone
     const btn = document.createElement('button');
-    btn.innerText = 'Abrir Widget';
-    btn.setAttribute('aria-label', 'Abrir Widget');
     btn.className = 'widget-btn';
+    btn.setAttribute('aria-label', 'Abrir Widget');
     document.body.appendChild(btn);
+
+    const icon = document.createElement('img');
+    icon.src = chevronDownSVG; // ícone inicial (seta para baixo)
+    icon.alt = 'Abrir Widget';
+    icon.style.width = '24px';
+    icon.style.height = '24px';
+    icon.style.transition = 'transform 0.2s';
+    icon.style.transform = 'rotate(180deg)';
+    btn.appendChild(icon);
 
     // Cria container do iFrame
     const container = document.createElement('div');
@@ -102,39 +114,38 @@
                 iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
                 iframe.src = WIDGET_URL;
                 container.appendChild(iframe);
-
-                // Quando o iframe terminar de carregar, já tenta enviar o ID:
                 iframe.addEventListener('load', sendUserId);
             }
             container.style.display = 'block';
-            btn.innerText = 'Fechar Widget';
+            icon.style.transform = 'rotate(0deg)';
+            icon.alt = 'Fechar Widget';
         } else {
             container.style.display = 'none';
-            btn.innerText = 'Abrir Widget';
+            icon.style.transform = 'rotate(180deg)';
+            icon.alt = 'Abrir Widget';
         }
     };
 
-    // Fecha pelo ESC
     window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && container.style.display === 'block') {
             container.style.display = 'none';
-            btn.innerText = 'Abrir Widget';
+            icon.style.transform = 'rotate(180deg)';
+            icon.alt = 'Abrir Widget';
         }
     });
 
-    // OUVE o "ready" do filho e responde com o ID
     window.addEventListener('message', function (event) {
         if (!event.origin || event.origin !== WIDGET_ORIGIN) return;
 
         if (event.data && event.data.widgetReady === true) {
-            // filho avisou que registrou o listener
             sendUserId();
             return;
         }
 
         if (event.data && event.data.widgetClose) {
             container.style.display = 'none';
-            btn.innerText = 'Abrir Widget';
+            icon.style.transform = 'rotate(180deg)';
+            icon.alt = 'Abrir Widget';
         }
     });
 
