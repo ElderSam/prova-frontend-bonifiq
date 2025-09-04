@@ -1,4 +1,8 @@
 .widget-root {
+  position: relative;
+}
+
+.widget-root {
   background: #6f34e4;
   min-height: 100vh;
   display: flex;

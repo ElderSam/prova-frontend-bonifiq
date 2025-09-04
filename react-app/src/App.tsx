@@ -2,11 +2,14 @@
 import { Suspense, useState, useEffect, useMemo } from 'react';
 import './App.css';
 import './AppWidget.css';
+
 import { UserHeader } from './components/UserHeader';
 import { PostList } from './components/PostList';
 import { Loading } from './components/Loading';
+
 import { fetchUser } from './services/userService';
 import { fetchPosts } from './services/postService';
+import { CloseButton } from './components/CloseButton';
 
 export type User = {
   id: number;
@@ -38,6 +41,7 @@ function App() {
 
   return (
     <div className="widget-root">
+      <CloseButton />
       <div className="widget-content">
         <Suspense fallback={<Loading showSpinner={false} />}>
           <UserHeader userPromise={userPromise} />

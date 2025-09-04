@@ -105,6 +105,13 @@
         }
     });
 
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.widgetClose) {
+            container.style.display = 'none';
+            btn.innerText = 'Abrir Widget';
+        }
+    });
+
     // Comunicação: envia loggedUserId para o iFrame
     function sendUserId() {
         if (window.loggedUserId) {
