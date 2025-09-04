@@ -12,7 +12,7 @@
     if (window.__widgetLoaded) return;
     window.__widgetLoaded = true;
 
-    // Injeta CSS global do widget
+    // Injeta CSS do widget
     const style = document.createElement('style');
     style.innerHTML = `
         .widget-btn {
@@ -80,7 +80,7 @@
     document.body.appendChild(btn);
 
     const icon = document.createElement('img');
-    icon.src = chevronDownSVG; // ícone inicial (seta para baixo)
+    icon.src = chevronDownSVG;
     icon.alt = 'Abrir Widget';
     icon.style.width = '24px';
     icon.style.height = '24px';
@@ -111,7 +111,7 @@
             if (!iframe) {
                 iframe = document.createElement('iframe');
                 iframe.title = 'Widget';
-                iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
+                // iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
                 iframe.src = WIDGET_URL;
                 container.appendChild(iframe);
                 iframe.addEventListener('load', sendUserId);
@@ -136,13 +136,8 @@
 
     window.addEventListener('message', function (event) {
         if (!event.origin || event.origin !== WIDGET_ORIGIN) return;
-
-        if (event.data && event.data.widgetReady === true) {
-            sendUserId();
-            return;
-        }
-
-        if (event.data && event.data.widgetClose) {
+        if (event.data?.widgetReady === true) sendUserId();
+        if (event.data?.widgetClose) {
             container.style.display = 'none';
             icon.style.transform = 'rotate(180deg)';
             icon.alt = 'Abrir Widget';
