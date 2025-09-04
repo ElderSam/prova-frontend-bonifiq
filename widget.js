@@ -35,10 +35,10 @@
             bottom: 80px;
             right: 24px;
             z-index: 9;
-            width: ${WIDGET_WIDTH}px;
-            max-width: 100vw;
-            height: ${WIDGET_HEIGHT}px;
-            max-height: 100vh;
+            width: 100%;
+            max-width: ${WIDGET_WIDTH}px;
+            height: 85vh;
+            max-height: ${WIDGET_HEIGHT}px;
             display: none;
             box-shadow: 0 4px 24px rgba(0,0,0,0.22);
             border-radius: 16px;
