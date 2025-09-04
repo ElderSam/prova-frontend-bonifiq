@@ -1,6 +1,6 @@
 import { use } from 'react';
 import type { User } from '../types/user';
-import './UserHeader.css';
+import '../css/UserHeader.css';
 
 export function UserHeader({ userPromise }: { userPromise: Promise<User> }) {
   const user = use(userPromise);

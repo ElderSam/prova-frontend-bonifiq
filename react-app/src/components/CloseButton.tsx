@@ -1,4 +1,4 @@
-import './CloseButton.css';
+import '../css/CloseButton.css';
 
 export function CloseButton () {
   function handleClose() {

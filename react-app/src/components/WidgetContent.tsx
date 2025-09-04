@@ -1,6 +1,6 @@
 
 import { Suspense, useMemo } from 'react';
-import './WidgetContent.css';
+import '../css/WidgetContent.css';
 
 import { UserHeader } from './../components/UserHeader';
 import { PostList } from './../components/PostList';

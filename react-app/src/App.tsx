@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import './App.css';
+import './css/App.css';
 import { WidgetContent } from './components/WidgetContent';
 
 function App() {
@@ -10,12 +10,13 @@ function App() {
   function onMessage(ev: MessageEvent) {
     // opcional: validar origin se quiser
     const data = ev.data as { type?: string; loggedUserId?: number };
-    if (data && data.type === 'widget:user' && typeof data.loggedUserId === 'number') {
-      setUserId(data.loggedUserId);
-    }
-    else {
-      setError("ID do usuário inválido.");
-    }
+    setUserId(2)
+    // if (data && data.type === 'widget:user' && typeof data.loggedUserId === 'number') {
+    //   setUserId(data.loggedUserId);
+    // }
+    // else {
+    //   setError("ID do usuário inválido.");
+    // }
   }
 
   useEffect(() => {

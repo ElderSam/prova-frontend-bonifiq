@@ -1,5 +1,5 @@
 import spinner from '../assets/spinner.svg';
-import './Loading.css';
+import '../css/Loading.css';
 
 type LoadingProps = {
   text?: string;
