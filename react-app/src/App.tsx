@@ -40,10 +40,10 @@ function App() {
     <div className="widget-root">
   <h2 className="widget-title">Widget de Usuário</h2>
   <div className="widget-content">
-        <Suspense fallback={<Loading text="Carregando usuário..." />}>
+        <Suspense fallback={<Loading showSpinner={false} />}>
           <UserHeader userPromise={userPromise} />
         </Suspense>
-        <Suspense fallback={<Loading text="Carregando posts..." />}>
+        <Suspense fallback={<Loading />}>
           <PostList postsPromise={postsPromise} />
         </Suspense>
       </div>
