@@ -1,5 +1,5 @@
 
-import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useMemo } from 'react';
 import './App.css';
 import './AppWidget.css';
 import { UserHeader } from './components/UserHeader';
@@ -33,8 +33,8 @@ function App() {
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
-  const userPromise = fetchUser(userId);
-  const postsPromise = fetchPosts(userId);
+  const userPromise = useMemo(() => fetchUser(userId), [userId]);
+  const postsPromise = useMemo(() => fetchPosts(userId), [userId]);
 
   return (
     <div className="widget-root">
