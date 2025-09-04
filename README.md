@@ -1,5 +1,15 @@
 # 🧪 Prova Prática – Desenvolvedor Front-End
 
+## Instruções
+
+1. Crie o build do react app e use um servidor estático
+``cd react-app``  
+``npm build``  
+``npx serve dist``
+
+2. Abra um dos 3 sites que disponibilizamos para teste  
+Exemplo: abra no navegador a página `sites-exemplo/Site01/index.html`
+
 ## 🧠 Objetivo
 
 Avaliar a capacidade do candidato em desenvolver e integrar um widget em uma página web, consumindo dados de uma API e utilizando tecnologias modernas como React.

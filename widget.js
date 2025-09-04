@@ -1,3 +1,119 @@
 (function () {
-    console.log('widget instalado');
+    // Configurações do widget
+    const WIDGET_URL = 'http://localhost:3000'; // Caminho relativo ao build React
+    const WIDGET_WIDTH = 320;
+    const WIDGET_HEIGHT = 600;
+
+    // Evita múltiplas execuções
+    if (window.__widgetLoaded) return;
+    window.__widgetLoaded = true;
+
+    // Injeta CSS global do widget
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .widget-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9;
+            padding: 14px 22px;
+            border-radius: 50px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .widget-btn:hover {
+            background: #0056b3;
+        }
+        .widget-container {
+            position: fixed;
+            bottom: 80px;
+            right: 24px;
+            z-index: 9;
+            width: ${WIDGET_WIDTH}px;
+            max-width: 100vw;
+            height: ${WIDGET_HEIGHT}px;
+            max-height: 100vh;
+            display: none;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.22);
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            touch-action: none;
+        }
+        .widget-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+        @media (max-width: 400px) {
+            .widget-container {
+                width: 98vw !important;
+                height: 98vh !important;
+                bottom: 1vh !important;
+                right: 1vw !important;
+            }
+            .widget-btn {
+                right: 1vw !important;
+                bottom: 1vh !important;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Cria botão flutuante
+    const btn = document.createElement('button');
+    btn.innerText = 'Abrir Widget';
+    btn.setAttribute('aria-label', 'Abrir Widget');
+    btn.className = 'widget-btn';
+    document.body.appendChild(btn);
+
+    // Cria container do iFrame
+    const container = document.createElement('div');
+    container.className = 'widget-container';
+    document.body.appendChild(container);
+
+    // Cria iFrame
+    const iframe = document.createElement('iframe');
+    iframe.src = WIDGET_URL;
+    iframe.title = 'Widget';
+    iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
+    container.appendChild(iframe);
+
+    // Abre/fecha widget
+    btn.onclick = function () {
+        if (container.style.display === 'none' || container.style.display === '') {
+            container.style.display = 'block';
+            btn.innerText = 'Fechar Widget';
+        } else {
+            container.style.display = 'none';
+            btn.innerText = 'Abrir Widget';
+        }
+    };
+
+    // Fecha pelo ESC
+    window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && container.style.display === 'block') {
+            container.style.display = 'none';
+            btn.innerText = 'Abrir Widget';
+        }
+    });
+
+    // Comunicação: envia loggedUserId para o iFrame
+    function sendUserId() {
+        if (window.loggedUserId) {
+            iframe.contentWindow.postMessage({ loggedUserId: window.loggedUserId }, '*');
+        }
+    }
+    // Envia ao abrir
+    btn.addEventListener('click', sendUserId);
+    // Envia ao carregar
+    iframe.addEventListener('load', sendUserId);
+
 })();
