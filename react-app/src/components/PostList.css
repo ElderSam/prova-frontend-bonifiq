@@ -4,7 +4,7 @@
 
 .widget-post {
   background-color: #340055;
-  margin: 7px;
+  margin: 12px 7px;
   padding: 7px;
   border-radius: 10px;
 
@@ -19,6 +19,7 @@
 }
 
 .widget-post-body {
+  text-align: start;
   font-size: 14px;
   color: #ccc;
 }
