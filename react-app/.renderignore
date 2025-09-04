@@ -1,0 +1,10 @@
+# Arquivo para ignorar arquivos e pastas no Render.com
+
+# Ignorar testes
+src/tests/
+
+# Node modules não precisam ser enviados
+node\_modules/
+
+# Build local (será gerado no Render a partir do Vite)
+dist/
