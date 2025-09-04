@@ -1,5 +1,6 @@
 import { use } from 'react';
 import type { Post } from '../App';
+import './PostList.css';
 
 export function PostList({ postsPromise }: { postsPromise: Promise<Post[]> }) {
   const posts = use(postsPromise);

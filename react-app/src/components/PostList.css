@@ -1,0 +1,24 @@
+.widget-posts {
+
+}
+
+.widget-post {
+  background-color: #340055;
+  margin: 7px;
+  padding: 7px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.widget-post-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.widget-post-body {
+  font-size: 14px;
+  color: #ccc;
+}
