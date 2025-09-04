@@ -1,14 +1,14 @@
 .widget-root {
-  position: relative;
-}
-
-.widget-root {
-  background: #6f34e4;
   min-height: 100vh;
+  min-width: 290px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
+  position: relative;
+
 }
 
 .widget-content {

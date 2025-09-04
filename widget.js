@@ -15,7 +15,7 @@
             position: fixed;
             bottom: 24px;
             right: 24px;
-            z-index: 9;
+            z-index: 9999;
             padding: 14px 22px;
             border-radius: 50px;
             background: #007bff;
@@ -34,7 +34,7 @@
             position: fixed;
             bottom: 80px;
             right: 24px;
-            z-index: 9;
+            z-index: 9999;
             width: 100%;
             max-width: ${WIDGET_WIDTH}px;
             height: 85vh;
