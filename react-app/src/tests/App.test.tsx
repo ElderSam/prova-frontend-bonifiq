@@ -3,8 +3,9 @@ import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 
 import App from '../App';
 import * as postService from '../services/postService';
+import * as userService from '../services/userService';
 
-// Mock do WidgetContent para forçar nome "Samuel"
+// Mock do WidgetContent
 vi.mock('../components/WidgetContent', () => {
   return {
     WidgetContent: ({ userId }: { userId: number }) => (
@@ -20,7 +21,7 @@ vi.mock('../components/WidgetContent', () => {
   };
 });
 
-// Função helper para disparar eventos de mensagem dentro do act
+// Helper para dispatch de mensagens
 async function dispatchMessage(data: any) {
   await act(async () => {
     window.dispatchEvent(new MessageEvent('message', { data }));
@@ -29,10 +30,14 @@ async function dispatchMessage(data: any) {
 
 describe('App', () => {
   beforeEach(() => {
+    // Mock das requisições de posts
     vi.spyOn(postService, 'fetchPosts').mockResolvedValue([
       { id: 1, title: 'Post 1' },
       { id: 2, title: 'Post 2' },
     ]);
+
+    // Mock das requisições de usuário
+    vi.spyOn(userService, 'fetchUser').mockResolvedValue({ id: 1, name: 'Samuel' });
   });
 
   afterEach(() => {
