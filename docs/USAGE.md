@@ -1,7 +1,7 @@
 # Uso do Widget – Instruções Detalhadas
 
 **OBSERVAÇÃO:**   
-Você pode ir direto para o **PASSO 4 (Incorporando o widget em qualquer site)**.   
+Você pode ir direto para o **[Ir para Passo 4](#4-incorporando-o-widget-em-qualquer-site)** (Incorporando o widget em qualquer site).   
 Os demais passos são OPCIONAIS.
 
 
