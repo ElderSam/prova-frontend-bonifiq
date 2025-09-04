@@ -1,14 +1,109 @@
 # 🧪 Prova Prática – Desenvolvedor Front-End
 
-## Instruções
+## Estrutura do projeto
 
-1. Crie o build do react app e use um servidor estático
-``cd react-app``  
-``npm build``  
-``npx serve -s dist -l 3000``
+* `react-app/` → Aplicação React construída com Vite.
+* `widget.js` → Script que cria o iFrame e insere o widget no site.
+* `sites-exemplo/` → Exemplos de sites que carregam o widget via `<script src="widget.js"></script>`.
 
-2. Abra um dos 3 sites que disponibilizamos para teste  
-Exemplo: abra no navegador a página `sites-exemplo/Site01/index.html`
+---
+
+## Testar projeto
+**OBSERVAÇÃO:**   
+Você pode ir direto para o **PASSO 3 (Incorporando o widget em qualquer site)**.   
+Os demais passos são OPCIONAIS.
+
+### 1. Rodando em desenvolvimento 
+
+1. Acesse a pasta do React App:
+
+```bash
+cd react-app
+```
+
+2. Instale dependências (se ainda não tiver feito):
+
+```bash
+pnpm install
+```
+
+3. Rode o servidor de desenvolvimento do Vite:
+
+```bash
+pnpm run dev
+```
+
+> A aplicação React ficará disponível em `http://localhost:5173`.
+
+4. No `widget.js`, use a URL de desenvolvimento:
+
+```js
+const WIDGET_URL = 'http://localhost:5173/';
+```
+
+5. Abra qualquer arquivo de `sites-exemplo/` no navegador. O widget será carregado via iFrame.
+
+---
+
+### 2. Build para produção / servidor local
+
+1. Crie o build do React App:
+
+```bash
+cd react-app
+pnpm run build
+```
+
+2. Sirva o build em um servidor estático:
+
+```bash
+npx serve -s dist -l 3000
+```
+
+3. Altere o `WIDGET_URL` em `widget.js` para apontar para o build ou para a URL pública do servidor:
+
+```js
+const WIDGET_URL = 'http://localhost:3000/';
+```
+
+4. Abra os sites de teste em `sites-exemplo/` para verificar o funcionamento.
+
+---
+
+### 3. Incorporando o widget em qualquer site
+
+1. Copie o arquivo `widget.js` para o seu site ou use um caminho público.
+2. Adicione a seguinte tag no `<body>` ou `<head>` do site:
+
+```html
+<script src="caminho/para/widget.js"></script>
+```
+
+3. O widget será adicionado automaticamente com botão flutuante e iFrame.
+
+> ⚠️ Certifique-se de que o `WIDGET_URL` aponte para a aplicação React hospedada.
+> ⚠️ O iFrame usa `postMessage` para comunicação, enviando apenas o `loggedUserId`.
+
+---
+
+### 4. Customizações rápidas
+
+* **Tamanho do widget:** Ajuste `WIDGET_WIDTH` e `WIDGET_HEIGHT` em `widget.js`.
+* **Ícone do botão:** Alterar `chevronDownSVG`.
+* **Estilos:** Podem ser modificados dentro do `style.innerHTML` do `widget.js`.
+
+---
+
+### 5. Exemplo de sites de teste
+
+* `sites-exemplo/Site01/index.html`
+* `sites-exemplo/Site02/index.html`
+* `sites-exemplo/Site03/index.html`
+
+Basta abrir qualquer um deles no navegador e o widget será carregado automaticamente.
+
+---
+
 
 ## 🧠 Objetivo
 
