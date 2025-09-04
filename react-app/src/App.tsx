@@ -1,46 +1,33 @@
 
-import { Suspense, useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
-import './AppWidget.css';
-
-import { UserHeader } from './components/UserHeader';
-import { PostList } from './components/PostList';
-import { Loading } from './components/Loading';
-
-import { fetchUser } from './services/userService';
-import { fetchPosts } from './services/postService';
-import { CloseButton } from './components/CloseButton';
-
+import { WidgetContent } from './components/WidgetContent';
 
 function App() {
-  const [userId, setUserId] = useState<number>(2);
+  const [userId, setUserId] = useState<number | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
+
       if (event.data && event.data.loggedUserId) {
         setUserId(Number(event.data.loggedUserId));
+      }
+      else {
+        setError(true);
       }
     }
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
-  const userPromise = useMemo(() => fetchUser(userId), [userId]);
-  const postsPromise = useMemo(() => fetchPosts(userId), [userId]);
+  if(error) {
+    return <h1>Atenção: <br/><span className='error-message'>ID do usuário inválido.</span></h1>
+  }
 
-  return (
-    <div className="widget-root">
-      <CloseButton />
-      <div className="widget-content">
-        <Suspense fallback={<Loading showSpinner={false} />}>
-          <UserHeader userPromise={userPromise} />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <PostList postsPromise={postsPromise} />
-        </Suspense>
-      </div>
-    </div>
-  );
+  if(userId) {
+    return <WidgetContent userId={userId} />
+  }
 }
 
 export default App;

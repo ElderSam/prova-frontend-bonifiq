@@ -5,3 +5,9 @@
 body {
   background-color: #6f34e4;
 }
+
+.error-message {
+  background-color: #fff;
+  color: #e64a76;
+  padding: 5px;
+}
