@@ -38,8 +38,7 @@ function App() {
 
   return (
     <div className="widget-root">
-  <h2 className="widget-title">Widget de Usuário</h2>
-  <div className="widget-content">
+      <div className="widget-content">
         <Suspense fallback={<Loading showSpinner={false} />}>
           <UserHeader userPromise={userPromise} />
         </Suspense>
