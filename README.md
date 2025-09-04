@@ -5,7 +5,7 @@
 1. Crie o build do react app e use um servidor estático
 ``cd react-app``  
 ``npm build``  
-``npx serve dist``
+``npx serve -s dist -l 3000``
 
 2. Abra um dos 3 sites que disponibilizamos para teste  
 Exemplo: abra no navegador a página `sites-exemplo/Site01/index.html`
