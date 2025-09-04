@@ -1,5 +1,5 @@
 import { use } from 'react';
-import type { User } from '../App';
+import type { User } from '../types/user';
 import './UserHeader.css';
 
 export function UserHeader({ userPromise }: { userPromise: Promise<User> }) {

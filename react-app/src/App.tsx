@@ -11,17 +11,6 @@ import { fetchUser } from './services/userService';
 import { fetchPosts } from './services/postService';
 import { CloseButton } from './components/CloseButton';
 
-export type User = {
-  id: number;
-  name: string;
-  email: string;
-};
-
-export type Post = {
-  id: number;
-  title: string;
-  body: string;
-};
 
 function App() {
   const [userId, setUserId] = useState<number>(2);
