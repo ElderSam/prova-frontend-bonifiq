@@ -1,10 +1,10 @@
 
 import { Suspense, useState, useEffect } from 'react';
 import './App.css';
+import './AppWidget.css';
 import { UserHeader } from './components/UserHeader';
 import { PostList } from './components/PostList';
 import { Loading } from './components/Loading';
-import { createResource } from './hooks/createResource';
 import { fetchUser } from './services/userService';
 import { fetchPosts } from './services/postService';
 
@@ -20,24 +20,6 @@ export type Post = {
   body: string;
 };
 
-// Simple cache for resources by userId
-const userResourceCache: Record<number, ReturnType<typeof createResource<User>>> = {};
-const postsResourceCache: Record<number, ReturnType<typeof createResource<Post[]>>> = {};
-
-function getUserResource(userId: number): ReturnType<typeof createResource<User>> {
-  if (!userResourceCache[userId]) {
-    userResourceCache[userId] = createResource<User>(fetchUser(userId));
-  }
-  return userResourceCache[userId];
-}
-
-function getPostsResource(userId: number): ReturnType<typeof createResource<Post[]>> {
-  if (!postsResourceCache[userId]) {
-    postsResourceCache[userId] = createResource<Post[]>(fetchPosts(userId));
-  }
-  return postsResourceCache[userId];
-}
-
 function App() {
   const [userId, setUserId] = useState<number>(2);
 
@@ -51,17 +33,20 @@ function App() {
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
-  const userResource = getUserResource(userId);
-  const postsResource = getPostsResource(userId);
+  const userPromise = fetchUser(userId);
+  const postsPromise = fetchPosts(userId);
 
   return (
     <div className="widget-root">
-      <Suspense fallback={<Loading text="Carregando usuário..." />}>
-        <UserHeader user={userResource.read()} />
-        <Suspense fallback={<Loading text="Carregando posts..." />}>
-          <PostList posts={postsResource.read()} />
+  <h2 className="widget-title">Widget de Usuário</h2>
+  <div className="widget-content">
+        <Suspense fallback={<Loading text="Carregando usuário..." />}>
+          <UserHeader userPromise={userPromise} />
         </Suspense>
-      </Suspense>
+        <Suspense fallback={<Loading text="Carregando posts..." />}>
+          <PostList postsPromise={postsPromise} />
+        </Suspense>
+      </div>
     </div>
   );
 }
