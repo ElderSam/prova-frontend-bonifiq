@@ -1,6 +1,8 @@
 (function () {
-    // Configurações do widget
-    const WIDGET_URL = 'http://localhost:3000'; // Caminho relativo ao build React
+    const WIDGET_URL = 'http://localhost:3000/'; // build
+    // const WIDGET_URL = 'http://localhost:5173/'; // dev
+    const WIDGET_ORIGIN = new URL(WIDGET_URL).origin; // usado no postMessage
+
     const WIDGET_WIDTH = 320;
     const WIDGET_HEIGHT = 600;
 
@@ -79,16 +81,31 @@
     container.className = 'widget-container';
     document.body.appendChild(container);
 
-    // Cria iFrame
-    const iframe = document.createElement('iframe');
-    iframe.src = WIDGET_URL;
-    iframe.title = 'Widget';
-    iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
-    container.appendChild(iframe);
+    let iframe;
 
-    // Abre/fecha widget
+    function sendUserId() {
+        if (!iframe || !iframe.contentWindow) return;
+        if (typeof window.loggedUserId === 'undefined' || window.loggedUserId === null) return;
+        iframe.contentWindow.postMessage(
+            { type: 'widget:user', loggedUserId: window.loggedUserId },
+            WIDGET_ORIGIN
+        );
+    }
+
+    // Toggle
     btn.onclick = function () {
-        if (container.style.display === 'none' || container.style.display === '') {
+        const closed = container.style.display === 'none' || container.style.display === '';
+        if (closed) {
+            if (!iframe) {
+                iframe = document.createElement('iframe');
+                iframe.title = 'Widget';
+                iframe.setAttribute('allow', 'clipboard-read; clipboard-write');
+                iframe.src = WIDGET_URL;
+                container.appendChild(iframe);
+
+                // Quando o iframe terminar de carregar, já tenta enviar o ID:
+                iframe.addEventListener('load', sendUserId);
+            }
             container.style.display = 'block';
             btn.innerText = 'Fechar Widget';
         } else {
@@ -105,22 +122,20 @@
         }
     });
 
-    window.addEventListener('message', function(event) {
+    // OUVE o "ready" do filho e responde com o ID
+    window.addEventListener('message', function (event) {
+        if (!event.origin || event.origin !== WIDGET_ORIGIN) return;
+
+        if (event.data && event.data.widgetReady === true) {
+            // filho avisou que registrou o listener
+            sendUserId();
+            return;
+        }
+
         if (event.data && event.data.widgetClose) {
             container.style.display = 'none';
             btn.innerText = 'Abrir Widget';
         }
     });
-
-    // Comunicação: envia loggedUserId para o iFrame
-    function sendUserId() {
-        if (window.loggedUserId) {
-            iframe.contentWindow.postMessage({ loggedUserId: window.loggedUserId }, '*');
-        }
-    }
-    // Envia ao abrir
-    btn.addEventListener('click', sendUserId);
-    // Envia ao carregar
-    iframe.addEventListener('load', sendUserId);
 
 })();

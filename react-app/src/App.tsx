@@ -5,29 +5,43 @@ import { WidgetContent } from './components/WidgetContent';
 
 function App() {
   const [userId, setUserId] = useState<number | null>(null);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  function onMessage(ev: MessageEvent) {
+    // opcional: validar origin se quiser
+    const data = ev.data as { type?: string; loggedUserId?: number };
+    if (data && data.type === 'widget:user' && typeof data.loggedUserId === 'number') {
+      setUserId(data.loggedUserId);
+    }
+    else {
+      setError("ID do usuário inválido.");
+    }
+  }
 
   useEffect(() => {
-    function handleMessage(event: MessageEvent) {
+    window.addEventListener('message', onMessage);
 
-      if (event.data && event.data.loggedUserId) {
-        setUserId(Number(event.data.loggedUserId));
-      }
-      else {
-        setError(true);
-      }
+    // Avisa o pai que o listener já está pronto:
+    try {
+      window.parent.postMessage({ widgetReady: true }, '*'); // Em prod, troque '*' pelo origin do pai se for fixo
     }
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    catch {
+      setError("Erro inesperado ao obter ID do usuário")
+    }
+
+    return () => window.removeEventListener('message', onMessage);
   }, []);
 
-  if(error) {
-    return <h1>Atenção: <br/><span className='error-message'>ID do usuário inválido.</span></h1>
-  }
 
-  if(userId) {
+  if (userId) {
     return <WidgetContent userId={userId} />
   }
+
+  if (error) {
+    return <h3>Atenção: <br /><span className='error-message'>{error}</span></h3>
+  }
+
+  return <p>Carregando widget...</p>; // 👈 fallback
 }
 
 export default App;
