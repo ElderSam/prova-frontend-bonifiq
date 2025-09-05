@@ -14,3 +14,6 @@ Veja todas as instruções de uso, build e produção em: [docs/USAGE.md](docs/U
 
 ## Desafio (concluído)
 [docs/DESAFIO.md](docs/DESAFIO.md)
+
+## Exemplo
+![iframe-projeto](https://github.com/user-attachments/assets/3378f6ab-0ef3-4507-bdcc-5aad304ddc2f)
