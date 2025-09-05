@@ -5,8 +5,9 @@
     // const WIDGET_URL = 'http://localhost:5173/'; // dev (React)
     const WIDGET_ORIGIN = new URL(WIDGET_URL).origin; // usado no postMessage
 
-    const chevronDownSVG = 'https://raw.githack.com/ElderSam/prova-frontend-bonifiq/main/imgs/chevron-down.svg';
-    // const chevronDownSVG = '../../imgs/chevron-down.svg';
+    // Conteúdo do SVG codificado em Base64.
+    // Esta é a forma mais robusta de lidar com o ícone, pois ele está embutido no seu JS.
+    const chevronDownSVG = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTcuNDEgOC41OUwxMiAxMy4xN2w0LjU5LTQuNThMMTggMTBsLTYgNi02LTZ6Ii8+PC9zdmc+';
 
     const WIDGET_WIDTH = 320;
     const WIDGET_HEIGHT = 600;
