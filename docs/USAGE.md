@@ -1,8 +1,12 @@
 # Uso do Widget – Instruções Detalhadas
 
 **OBSERVAÇÃO:**   
-Você pode ir direto para o **[Ir para Passo 4](#4-incorporando-o-widget-em-qualquer-site)** (Incorporando o widget em qualquer site).   
+Se você apenas quer incorporar o `widget.js` no site, você pode ir direto para o **[Ir para Passo 4](#4-incorporando-o-widget-em-qualquer-site)** (Incorporando o widget em qualquer site).   
 Os demais passos são OPCIONAIS.
+
+## 0. Teste rápido
+Acesse: https://prova-frontend-bonifiq-site01.onrender.com/
+
 
 
 ## 1. Rodando em desenvolvimento
@@ -86,7 +90,7 @@ OBSERVAÇÃO: no meu caso a url gerado foi https://prova-frontend-bonifiq.vercel
 1. Copie o arquivo `widget.js` para o seu site ou use um caminho público. Por exemplo, usando o GitHub raw (para teste rápido):
 
 ```html
-<script src="https://raw.githubusercontent.com/ElderSam/prova-frontend-bonifiq/main/widget.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ElderSam/prova-frontend-bonifiq@master/widget.js"></script>
 ```
 
 2. O widget será adicionado automaticamente com botão flutuante e iFrame.
