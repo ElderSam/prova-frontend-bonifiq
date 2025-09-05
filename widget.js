@@ -5,7 +5,7 @@
     // const WIDGET_URL = 'http://localhost:5173/'; // dev (React)
     const WIDGET_ORIGIN = new URL(WIDGET_URL).origin; // usado no postMessage
 
-    const chevronDownSVG = 'https://github.com/ElderSam/prova-frontend-bonifiq/blob/main/imgs/chevron-down.svg';
+    const chevronDownSVG = 'https://cdn.jsdelivr.net/gh/ElderSam/prova-frontend-bonifiq/imgs/chevron-down.svg';
     // const chevronDownSVG = '../../imgs/chevron-down.svg';
 
     const WIDGET_WIDTH = 320;
