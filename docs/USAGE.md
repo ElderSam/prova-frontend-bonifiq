@@ -5,7 +5,7 @@ Se você apenas quer incorporar o `widget.js` no site, você pode ir direto para
 Os demais passos são OPCIONAIS.
 
 ## 0. Teste rápido
-Acesse: https://prova-frontend-bonifiq-site01.onrender.com/
+Acesse: https://prova-frontend-bonifiq-fpad-eqomgi7s9-eldersams-projects.vercel.app/
 
 
 
