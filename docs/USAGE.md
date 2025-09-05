@@ -5,9 +5,11 @@ Se você apenas quer incorporar o `widget.js` no site, você pode ir direto para
 Os demais passos são OPCIONAIS.
 
 ## 0. Teste rápido
+### Em produção
 Acesse: https://prova-frontend-bonifiq-fpad-eqomgi7s9-eldersams-projects.vercel.app/
 
-
+### Site Local usando widget.js externo
+Ou abra o [../sites-exemplo/Site01/index.html](../sites-exemplo/Site01/index.html) no navegador.
 
 ## 1. Rodando em desenvolvimento
 
@@ -109,9 +111,10 @@ OBSERVAÇÃO: no meu caso a url gerado foi https://prova-frontend-bonifiq.vercel
 ---
 
 ## 6. Exemplos de sites de teste
-
 * `sites-exemplo/Site01/index.html`
 * `sites-exemplo/Site02/index.html`
 * `sites-exemplo/Site03/index.html`
 
 Basta abrir qualquer um deles no navegador e o widget será carregado automaticamente.
+
+O Site01 usa `widget.js` de CDN (obtendo iframe de produção). Já os outros exemplos usam `widget.js` local.
