@@ -62,21 +62,22 @@ const WIDGET_URL = 'http://localhost:3000/';
 
 ---
 
-## 3. Publicação em produção (Render.com)
+## 3. Publicação em produção (Vercel)
 
-1. Crie uma conta em [Render](https://render.com) e faça login.
+1. Crie uma conta em   [Vercel](https://vercel.com/) e faça login.
 2. Crie um novo **Static Site**:
-
+   * Framework Preset: `Vite`
    * Repositório: `ElderSam/prova-frontend-bonifiq`
    * Branch: `main`
-   * Build Command: `npm install && npm run build`
-   * Publish Directory: `react-app/dist`
-3. Render vai gerar uma URL pública, ex.: `https://seu-widget.onrender.com`.
+   * Root Directory: `react-app`
+3. Render vai gerar uma URL pública, ex.: `https://....vercel.app`.
 4. Atualize o `WIDGET_URL` em `widget.js` para a URL do Render:
 
 ```js
-const WIDGET_URL = 'https://seu-widget.onrender.com';
+const WIDGET_URL = 'https://....vercel.app';
 ```
+
+OBSERVAÇÃO: no meu caso a url gerado foi https://prova-frontend-bonifiq.vercel.app
 
 ---
 
