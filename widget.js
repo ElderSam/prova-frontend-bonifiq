@@ -1,6 +1,8 @@
 (function () {
-    const WIDGET_URL = 'http://localhost:3000/'; // build
-    // const WIDGET_URL = 'http://localhost:5173/'; // dev
+
+    const WIDGET_URL = 'https://prova-frontend-bonifiq.vercel.app'; // Production build (React)
+    // const WIDGET_URL = 'http://localhost:3000/'; // build local (React)
+    // const WIDGET_URL = 'http://localhost:5173/'; // dev (React)
     const WIDGET_ORIGIN = new URL(WIDGET_URL).origin; // usado no postMessage
 
     const chevronDownSVG = '../../imgs/chevron-down.svg';
