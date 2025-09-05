@@ -10,13 +10,13 @@ function App() {
   function onMessage(ev: MessageEvent) {
     // opcional: validar origin se quiser
     const data = ev.data as { type?: string; loggedUserId?: number };
-    setUserId(2)
-    // if (data && data.type === 'widget:user' && typeof data.loggedUserId === 'number') {
-    //   setUserId(data.loggedUserId);
-    // }
-    // else {
-    //   setError("ID do usuário inválido.");
-    // }
+
+    if (data && data.type === 'widget:user' && typeof data.loggedUserId === 'number') {
+      setUserId(data.loggedUserId);
+    }
+    else {
+      setError("ID do usuário inválido.");
+    }
   }
 
   useEffect(() => {
